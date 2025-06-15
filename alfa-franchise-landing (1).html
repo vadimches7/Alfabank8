@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Альфа-Банк × Франшизы: Увеличьте доход УК от 1,5+ млн ₽ в год и привлеките новых франчайзи без вложений</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --alfa-red: #ef3124;
+            --alfa-dark-red: #d62918;
+            --text-dark: #1a1a1a;
+            --text-gray: #666;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --success: #4caf50;
+            --warning: #ffd700;
+            --telegram-blue: #0088cc;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--white);
+        }
+        
+        /* Прелоадер */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--alfa-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Навигация */
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navigation.scrolled {
+            padding: 10px 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--alfa-red);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-menu a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--alfa-red);
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero секция */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e94b3c 0%, #f56457 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 80px 20px 40px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            from {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: var(--white);
+            z-index: 1;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .logo-hero {
+            background: var(--white);
+            color: var(--alfa-red);
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 20px;
+            display: inline-block;
+            margin-bottom: 40px;
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 800;
+            margin-bottom: 30px;
+            animation: slideUp 0.8s ease-out 0.2s both;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            line-height: 1.1;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(20px, 3vw, 28px);
+            margin-bottom: 40px;
+            opacity: 0.95;
+            animation: slideUp 0.8s ease-out 0.4s both;
+            font-weight: 300;
+        }
+        
+        .hero-highlight {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 25px;
+            padding: 40px 60px;
+            margin: 50px auto;
+            max-width: 700px;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+        
+        .hero-highlight h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .hero-highlight p {
+            font-size: clamp(16px, 2vw, 20px);
+            opacity: 0.9;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--white);
+            color: var(--alfa-red);
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            animation: pulse-button 2s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-top: 30px;
+        }
+        
+        .cta-primary span {
+            font-size: 24px;
+        }
+        
+        @keyframes pulse-button {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            }
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        /* Новая секция - Привлечение франчайзи */
+        .franchise-attraction {
+            padding: 100px 20px;
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .franchise-attraction::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(239, 49, 36, 0.03), transparent);
+            animation: slide 8s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .franchise-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .franchise-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .franchise-header h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .franchise-header p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .franchise-main {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 30px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .franchise-main::after {
+            content: '🚀';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            font-size: 200px;
+            opacity: 0.05;
+            transform: rotate(-15deg);
+        }
+        
+        .franchise-number {
+            font-size: clamp(60px, 8vw, 120px);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--alfa-red), #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .franchise-main h3 {
+            font-size: clamp(28px, 3.5vw, 40px);
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        .franchise-main p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--text-gray);
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .franchise-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .franchise-feature {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .franchise-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--alfa-red);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .franchise-feature:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .franchise-feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        
+        .franchise-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(239, 49, 36, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .franchise-feature h4 {
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .franchise-feature p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+        .franchise-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .franchise-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--alfa-red);
+            color: var(--white);
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(239, 49, 36, 0.3);
+        }
+        
+        .franchise-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(239, 49, 36, 0.4);
+            background: var(--alfa-dark-red);
+        }
+        
+        /* Секция проблем */
+        .problems {
+            padding: 100px 20px;
+            background: var(--bg-light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .problem-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .problem-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .problem-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffebeb, #ffe0e0);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .problem-card:hover .problem-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        /* Секция решения */
+        .solution {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .solution::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff20" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center no-repeat;
+            background-size: cover;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        
+        .benefit-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .benefit-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-10px);
+        }
+        
+        .benefit-number {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--warning), #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Секция калькулятора */
+        .calculator {
+            padding: 100px 20px;
+            background: var(--white);
+        }
+        
+        .calculator-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .calc-controls {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .calc-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .calc-input-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 18px;
+        }
+        
+        .range-input {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 10px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .range-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--alfa-red);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .range-input::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        .range-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--alfa-red);
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .calc-details {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            display: grid;
+            gap: 20px;
+        }
+        
+        .calc-detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .calc-detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .calc-detail-item span {
+            color: var(--text-gray);
+            font-size: 16px;
+        }
+        
+        .calc-detail-item strong {
+            color: var(--text-dark);
+            font-size: 20px;
+        }
+        
+        .calc-result {
+            background: linear-gradient(135deg, var(--alfa-red), #ff6b6b);
+            color: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+        }
+        
+        .calc-result.active {
+            transform: scale(1);
+        }
+        
+        .result-breakdown {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        
+        .result-amount {
+            font-size: 48px;
+            font-weight: 800;
+            margin: 20px 0;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .calc-cta {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .calc-button {
+            display: inline-block;
+            background: var(--alfa-red);
+            color: var(--white);
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(239,49,36,0.3);
+        }
+        
+        .calc-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(239,49,36,0.4);
+        }
+        
+        /* Секция продуктов */
+        .products {
+            padding: 100px 20px;
+            background: var(--bg-light);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--alfa-red), #ff6b6b);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .product-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffebeb, #ffe0e0);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            margin-bottom: 25px;
+        }
+        
+        .product-card h3 {
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+        
+        .product-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .product-features li {
+            padding: 10px 0;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+        
+        .product-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .special-badge {
+            background: #fff3cd;
+            color: #856404;
+            padding: 12px 20px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        /* Процесс */
+        .process {
+            padding: 100px 20px;
+            background: var(--white);
+        }
+        
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--alfa-red);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 50px 0;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+            transform: translateX(50px);
+        }
+        
+        .timeline-item:nth-child(even).visible {
+            transform: translateX(0);
+        }
+        
+        .timeline-content {
+            flex: 1;
+            padding: 30px;
+            background: var(--bg-light);
+            border-radius: 20px;
+            margin: 0 30px;
+        }
+        
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--alfa-red);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 5px 20px rgba(239,49,36,0.3);
+        }
+        
+        /* CTA секция */
+        .cta-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--alfa-red) 0%, #ff6b6b 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .cta-content > p {
+            font-size: clamp(20px, 2.5vw, 24px);
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .cta-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        
+        .cta-info p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .cta-list li {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+        
+        .cta-list li::before {
+            content: '✓';
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .cta-telegram {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--telegram-blue);
+            color: var(--white);
+            padding: 25px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 22px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: float-button 3s ease-in-out infinite;
+        }
+        
+        @keyframes float-button {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .cta-telegram:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        
+        .telegram-icon {
+            font-size: 30px;
+        }
+        
+        .cta-note {
+            margin-top: 20px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        /* Футер */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        /* Кнопка Telegram фиксированная */
+        .telegram-fixed {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--telegram-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: pulse-telegram 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-telegram {
+            0%, 100% {
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            }
+            50% {
+                box-shadow: 0 5px 30px rgba(0,136,204,0.6);
+            }
+        }
+        
+        .telegram-fixed:hover {
+            transform: scale(1.1);
+        }
+        
+        .telegram-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 25px;
+            white-space: nowrap;
+            font-size: 14px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        
+        .telegram-fixed:hover .telegram-tooltip {
+            opacity: 1;
+            right: 80px;
+        }
+        
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .franchise-main {
+                padding: 40px 20px;
+            }
+            
+            .franchise-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .problems-grid,
+            .benefits-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-wrapper {
+                padding: 30px 20px;
+            }
+            
+            .calc-detail-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+                transform: translateX(0);
+            }
+            
+            .timeline-content {
+                margin-left: 90px;
+                margin-right: 0;
+            }
+            
+            .telegram-fixed {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+            }
+            
+            .telegram-tooltip {
+                display: none;
+            }
+            
+            .cta-info {
+                padding: 20px;
+            }
+            
+            .cta-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-telegram {
+                padding: 20px 30px;
+                font-size: 18px;
+            }
+            
+            .calc-button {
+                font-size: 16px;
+                padding: 15px 25px;
+            }
+        }
+        
+        /* Скроллбар */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--alfa-red);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--alfa-dark-red);
+        }
+    </style>
+</head>
+<body>
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Навигация -->
+    <nav class="navigation" id="navigation">
+        <div class="nav-container">
+            <a href="#" class="logo">АЛЬФА-БАНК × ФРАНШИЗЫ</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#problems">Проблемы</a></li>
+                <li><a href="#solution">Решение</a></li>
+                <li><a href="#calculator">Калькулятор</a></li>
+                <li><a href="#products">Продукты</a></li>
+                <li><a href="#process">Процесс</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero секция -->
+    <section class="hero">
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="logo-hero">АЛЬФА-БАНК</div>
+            <h1 style="font-size: clamp(36px, 5vw, 56px); font-weight: 800; margin-bottom: 25px;">Партнерская программа для франшиз</h1>
+            <p class="hero-subtitle" style="font-size: clamp(18px, 2.5vw, 24px); font-weight: 400; line-height: 1.5; margin-bottom: 50px;">Увеличьте доход УК от 1,5+ млн ₽ в год<br>и привлеките новых франчайзи без вложений</p>
+            
+            <div class="hero-highlight">
+                <h2>20% от всех комиссий банка</h2>
+                <p>В течение 12 месяцев с каждого подключенного франчайзи<br>
+                <small style="font-size: 16px; opacity: 0.8;">+ индивидуальные условия для крупных сетей</small></p>
+            </div>
+            
+            <a href="https://t.me/Lana_Agent_Fox" class="cta-primary">
+                <span>📊</span> Рассчитать мой доход
+            </a>
+        </div>
+    </section>
+
+    <!-- Новая секция - Привлечение франчайзи -->
+    <section class="franchise-attraction">
+        <div class="franchise-content">
+            <div class="franchise-header">
+                <h2>Получите новых франчайзи из базы Альфа-Банка</h2>
+                <p>Это не просто дополнительный доход — это поток качественных партнеров для вашей сети</p>
+            </div>
+            
+            <div class="franchise-main">
+                <div class="franchise-number">1,5 млн</div>
+                <h3>Предпринимателей — клиентов Альфа-Банка</h3>
+                <p>Мы разместим оффер вашей франшизы на ресурсах банка. Каждый месяц более 500 000 предпринимателей увидят ваше предложение.</p>
+            </div>
+            
+            <div class="franchise-features">
+                <div class="franchise-feature">
+                    <div class="franchise-icon">🎯</div>
+                    <h4>100% целевая аудитория</h4>
+                    <p>Только действующие предприниматели с подтвержденными оборотами и опытом ведения бизнеса</p>
+                </div>
+                <div class="franchise-feature">
+                    <div class="franchise-icon">🚀</div>
+                    <h4>Горячий трафик</h4>
+                    <p>Предприниматели активно ищут возможности для масштабирования и диверсификации бизнеса</p>
+                </div>
+            </div>
+            
+            <div class="franchise-cta">
+                <a href="https://t.me/Lana_Agent_Fox" class="franchise-button">
+                    Начать привлекать франчайзи →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция проблем -->
+    <section class="problems" id="problems">
+        <div class="container">
+            <div class="section-header">
+                <h2>Что мешает вашим франчайзи расти?</h2>
+                <p>Исследование среди 500+ франчайзи показало основные барьеры</p>
+            </div>
+            
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">⏱️</div>
+                    <h3>Долгий запуск бизнеса</h3>
+                    <p>Месяцы на регистрацию, открытие счета и подключение всех сервисов</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🚫</div>
+                    <h3>Отказы в кредитовании</h3>
+                    <p>87% новых франчайзи не могут получить кредит в первый год из-за отсутствия истории</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">📊</div>
+                    <h3>Сложность масштабирования</h3>
+                    <p>Нет финансовой подушки для открытия новых точек и развития</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция решения -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: white;">Специальные условия Альфа-Банка для ваших франчайзи</h2>
+                <p style="color: white; opacity: 0.9;">Комплексное решение всех финансовых вопросов</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-number">5 мин</div>
+                    <h3>Открытие счета</h3>
+                    <p>Быстрое оформление без лишних документов</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">0 ₽</div>
+                    <h3>РКО на 3 месяца</h3>
+                    <p>Бесплатное обслуживание для новых клиентов</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">от 0.4%</div>
+                    <h3>Эквайринг СБП</h3>
+                    <p>Самые низкие ставки на рынке</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">500 000 ₽</div>
+                    <h3>Кредит доступен</h3>
+                    <p>От 500 000 ₽ с первого месяца регистрации</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Калькулятор -->
+    <section class="calculator" id="calculator">
+        <div class="container">
+            <div class="section-header">
+                <h2>Примерный расчет вашего дохода</h2>
+                <p>Базовый калькулятор для первичной оценки. Точный расчет сделаем под ваши условия</p>
+            </div>
+            
+            <div class="calculator-wrapper">
+                <div class="calc-controls">
+                    <div class="calc-input-group">
+                        <label for="franchiseCount">Количество франчайзи</label>
+                        <input type="range" id="franchiseCount" class="range-input" min="10" max="500" value="100" step="10">
+                        <div class="range-value" id="franchiseCountValue">100</div>
+                    </div>
+                </div>
+                
+                <div class="calc-details">
+                    <div class="calc-detail-item">
+                        <span>Средняя комиссия банка с точки:</span>
+                        <strong>2 500 ₽/мес</strong>
+                    </div>
+                    <div class="calc-detail-item">
+                        <span>Ваша комиссия (20%):</span>
+                        <strong>от 500 ₽/мес с точки</strong>
+                    </div>
+                    <div class="calc-detail-item">
+                        <span>Единоразовый бонус за точку:</span>
+                        <strong>6 500 ₽</strong>
+                    </div>
+                </div>
+                
+                <div class="calc-result active">
+                    <h3>Примерный доход за 12 месяцев</h3>
+                    <div class="result-breakdown">
+                        <div class="result-item">
+                            <span>Ежемесячные выплаты:</span>
+                            <span id="monthlyIncome">600 000 ₽</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Единоразовые бонусы:</span>
+                            <span id="bonusIncome">650 000 ₽</span>
+                        </div>
+                    </div>
+                    <div class="result-amount" id="resultAmount">1 250 000 ₽</div>
+                    <p>Это базовый расчет. Точную сумму рассчитаем индивидуально под ваш бизнес</p>
+                </div>
+                
+                <div class="calc-cta">
+                    <a href="https://t.me/Lana_Agent_Fox" class="calc-button">
+                        Получить точный расчет для моего бизнеса →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Полный пакет для франчайзи -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Полный пакет для франчайзи</h2>
+                <p>Все необходимое для успешного старта и масштабирования</p>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">💳</div>
+                    <h3>Расчетный счет</h3>
+                    <ul class="product-features">
+                        <li>Открытие за 5 минут</li>
+                        <li>Бесплатное обслуживание 3 месяца</li>
+                        <li>Переводы ФЛ до 3 млн ₽ бесплатно</li>
+                        <li>Зарплатный проект 0 ₽</li>
+                    </ul>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-icon">🏪</div>
+                    <h3>Эквайринг</h3>
+                    <ul class="product-features">
+                        <li>Торговый эквайринг от 1%</li>
+                        <li>QR-платежи СБП от 0,4%</li>
+                        <li>Интернет-эквайринг от 1%</li>
+                        <li>Моментальное зачисление +0,2%</li>
+                    </ul>
+                    <div class="special-badge">🚀 Подключение за 3 дня</div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-icon">💰</div>
+                    <h3>Кредитование</h3>
+                    <ul class="product-features">
+                        <li>Кредит с первого дня от 500 000 ₽</li>
+                        <li>Бизнес-кредит до 150 млн ₽</li>
+                        <li>Кредитная карта от 500 000 ₽</li>
+                    </ul>
+                    <div class="special-badge">⚡ Предварительное одобрение за 5 минут</div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-icon">🛡️</div>
+                    <h3>Дополнительные сервисы</h3>
+                    <ul class="product-features">
+                        <li>Онлайн-бухгалтерия</li>
+                        <li>Юридические консультации</li>
+                        <li>Проверка контрагентов</li>
+                        <li>Геоаналитика для выбора точки</li>
+                    </ul>
+                    <div class="special-badge">💎 Эксклюзив для партнеров</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Процесс -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Индивидуальный подход к каждому партнеру</h2>
+                <p>5 шагов до старта вашей персональной программы</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">1</div>
+                    <div class="timeline-content">
+                        <h3>Анализ вашей франшизы</h3>
+                        <p>Изучаем специфику бизнеса, считаем индивидуальные условия. Готовим персональное предложение</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">2</div>
+                    <div class="timeline-content">
+                        <h3>Подписание соглашения</h3>
+                        <p>Фиксируем ваши индивидуальные условия в договоре. Все онлайн через ЭЦП за 1 день</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">3</div>
+                    <div class="timeline-content">
+                        <h3>Информирование франчайзи</h3>
+                        <p>Готовим материалы под вашу аудиторию. Проводим персональный вебинар для ваших партнеров</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">4</div>
+                    <div class="timeline-content">
+                        <h3>Запуск и сопровождение</h3>
+                        <p>Выделяем команду под ваш проект. Контролируем подключение каждого франчайзи</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">5</div>
+                    <div class="timeline-content">
+                        <h3>Ежемесячные выплаты</h3>
+                        <p>Получаете выплаты согласно индивидуальным условиям. Прозрачная отчетность в личном кабинете</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA секция -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Готовы увеличить доход и привлечь новых франчайзи в вашу сеть?</h2>
+            <p>Получите индивидуальный расчет для вашей франшизы</p>
+            
+            <div class="cta-info">
+                <p>Каждый бизнес уникален. Мы проанализируем вашу модель франшизы и рассчитаем точный доход с учетом:</p>
+                <ul class="cta-list">
+                    <li>Специфики вашей отрасли</li>
+                    <li>Среднего чека и оборотов франчайзи</li>
+                    <li>Количества активных точек</li>
+                    <li>Потенциала роста сети</li>
+                </ul>
+            </div>
+            
+            <a href="https://t.me/Lana_Agent_Fox" class="cta-telegram">
+                <span class="telegram-icon">💬</span>
+                Получить персональный расчет
+            </a>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <p>© 2025 АО «Альфа-Банк». Генеральная лицензия Банка России № 1326</p>
+        <p>Лана Погосян | +7 (916) 913-87-00 | LGPogosyan@alfabank.ru</p>
+    </footer>
+
+    <!-- Фиксированная кнопка Telegram -->
+    <a href="https://t.me/Lana_Agent_Fox" class="telegram-fixed">
+        <span class="telegram-tooltip">Получить индивидуальный расчет</span>
+        💬
+    </a>
+
+    <script>
+        // Прелоадер
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Частицы в hero
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 10 + 5 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = Math.random() * 20 + 20 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Навигация
+        const navigation = document.getElementById('navigation');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navigation.classList.add('scrolled');
+            } else {
+                navigation.classList.remove('scrolled');
+            }
+        });
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Анимации при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.problem-card, .benefit-card, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Калькулятор
+        const franchiseCount = document.getElementById('franchiseCount');
+        const franchiseCountValue = document.getElementById('franchiseCountValue');
+        const monthlyIncome = document.getElementById('monthlyIncome');
+        const bonusIncome = document.getElementById('bonusIncome');
+        const resultAmount = document.getElementById('resultAmount');
+
+        function calculateIncome() {
+            const count = parseInt(franchiseCount.value);
+            
+            // Расчет: средняя комиссия банка 2500₽, партнер получает 20% = 500₽/мес с точки
+            const monthlyPerPoint = 500;
+            const bonusPerPoint = 6500;
+            
+            const totalMonthly = monthlyPerPoint * count * 12;
+            const totalBonus = bonusPerPoint * count;
+            const totalIncome = totalMonthly + totalBonus;
+            
+            monthlyIncome.textContent = totalMonthly.toLocaleString('ru-RU') + ' ₽';
+            bonusIncome.textContent = totalBonus.toLocaleString('ru-RU') + ' ₽';
+            resultAmount.textContent = totalIncome.toLocaleString('ru-RU') + ' ₽';
+        }
+
+        franchiseCount.addEventListener('input', (e) => {
+            franchiseCountValue.textContent = e.target.value;
+            calculateIncome();
+        });
+
+        // Инициализация калькулятора
+        calculateIncome();
+    </script>
+</body>
+</html>
